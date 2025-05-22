@@ -1,0 +1,163 @@
+https://thor.enseirb-matmeca.fr/sites/teaching-fmorandat-python
+
+#######################
+x = 3
+type(x) => class 'int'
+y = 0.2
+type(y) => class 'float'
+
+
+######################
+3 / 2
+3 // 2
+5 % 3
+5 ** 2
+
+############################
+x = "Coucou le monde"
+type(x) => class 'str'
+y = 'Hello, world'
+type(y) => class 'str'
+
+'nde' in x => TRUE
+'nde' in y => FALSE
+
+len(x)
+x[7] => 'l'
+x[-1] => 'e'
+x[-2] => 'd'
+x[7:9] => 'le'
+x[::-1] => 'ednom el uocuoC'
+
+
+################################
+x.upper() => 'COUCOU LE MONDE'
+'mangé'.upper() => MANGE
+x.count('ou') => 2
+'aaaa'.count('aa') => 2
+x.split(' ') => ['Coucou', 'le', 'monde']
+'   text '.strip() => 'text'
+'Foo'.rjust(10, ' ') => '       Foo'
+x.replace(' ', '-') => 'Coucou-le-monde'
+
+
+####################################
+How to create '.......Foo' from the string 'Foo'?
+=> '.......Foo'.strip('.')
+
+
+#################################################
+name = 'Ben'
+age = 5
+f'Hello, {name}, you are {age} years old'
+
+def make_filename(name, age):
+    return f'{name}_{age}.jpg'
+
+make_filename('Alice', '2') => 'Alice_2.jpg'
+
+dir(name) => function can be executde by var name
+
+
+###########################################
+li = ['vélo', 1, 'fin']
+li
+len(li) => 3
+
+li[0] => 'vélo'
+li[-1] => 'fin'
+li[::2] => ['vélo', 'fin']
+li[1:] => [1, 'fin']
+li[::-1] => ['fin', 1, 'vélo']
+li[2][1] => 'i'
+
+What is the type of li[0]? And of li[1:]?
+li[0] => class 'str'
+li[1:] => class 'list'
+
+
+#######################################
+li[1] = 'volant'
+li
+What does the statement li[1] => second element in the var 'li'
+
+
+#########################################
+li.append('test') => ['vélo', 'volant', 'fin', 'test', 'test']
+li => ['vélo', 'volant', 'fin', 'test', 'test']
+[1,2,3] + [4,5,6] => [1, 2, 3, 4, 5, 6]
+[0, 1] * 4 => [0, 1, 0, 1, 0, 1, 0, 1]
+"fin" in li => True
+", ".join(li) => ['vélo', 'volant', 'fin', 'test', 'test']
+
+
+################################################
+s = {'Bordeaux', 'Marseille', 'Rennes'}
+s => {'Bordeaux', 'Marseille', 'Rennes'}
+'Paris' in s => FALSE
+'Londres' in s => FALSE
+s[0] => ERROR => 'set' object is not subscriptable
+
+
+#################################################
+s.add('Toulouse')
+s => {'Rennes', 'Bordeaux', 'Toulouse', 'Marseille'}
+s.union({'Strasbourg', 'Nancy'}) => {'Rennes', 'Bordeaux', 'Strasbourg', 'Toulouse', 'Marseille', 'Nancy'}
+
+Is there operator to compute union of two sets ? And the intersection?
+
+
+
+#############################################################
+list(s) => ['Rennes', 'Bordeaux', 'Toulouse', 'Marseille']
+set(li) => {'test', 'volant', 'vélo', 'fin'}
+
+
+##############################################################
+t = ('Bordeaux', 33)
+t[0], len(t), t[-1] => ('Bordeaux', 2, 33)
+t[0] = 'Libourne' => ERROR
+
+What’s the type of t[0], len(t), t[-1]?
+str, int, int
+
+t.append(2) => 'tuple' object has no attribute 'append'
+t + ('Nouvelle Aquitaine',) => ('Bordeaux', 33, 'Nouvelle Aquitaine')
+Why do we need a coma after 'Nouvelle Aquitaine'? => Too append to a tupple type var
+
+
+
+##################################################################
+tuple(s) => ('Rennes', 'Bordeaux', 'Toulouse', 'Marseille')
+
+
+
+*DICTIONNARIES*
+####################################################################
+bdx = {'ville': 'Bordeaux', 'département': 33}
+bdx => {'ville': 'Bordeaux', 'département': 33}
+'ville' in bdx => TRUE
+bdx['ville'] => 'Bordeaux'
+bdx['région'] => ERROR => KeyError: 'région'
+'région' in bdx => FALSE
+bdx.keys() => dict_keys(['ville', 'département'])
+'Bordeaux' in bdx.keys() => FALSE
+bdx.values() => dict_values(['Bordeaux', 33])
+'Bordeaux' in bdx.values() => TRUE
+bdx_items = bdx.items()
+bdx_items => dict_items([('ville', 'Bordeaux'), ('département', 33)])
+('ville', 'Bordeaux') in bdx_items => TRUE
+
+What is the type of bdx_items? What is the type of items inside bdx_items?
+=> 'dict_items'
+
+bdx['région'] = 'Nouvelle Aquitaine'
+bdx => {'ville': 'Bordeaux', 'département': 33, 'région': 'Nouvelle Aquitaine'}
+bdx_items => dict_items([('ville', 'Bordeaux'), ('département', 33), ('région', 'Nouvelle Aquitaine')])
+Can you explain what is printed by this last command 
+
+bdx['pays'] => KeyError: 'pays'
+bdx.get('pays')
+bdx.get('pays', 'France') => 'France'
+With the help command, explain the result of the last statement
+
