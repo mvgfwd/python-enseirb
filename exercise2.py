@@ -40,7 +40,7 @@ print(f"double([1,2,3]), {d_list}")
 #double('a') //ERROR
 #double({1,2,3}) //ERROR
 
-
+[len(x) for x in li]
 #FUNCTION
 def hello(name, greeting='Hello'):
     return f'{greeting}, {name}!'
@@ -55,7 +55,6 @@ print(f"hello('John', 'Bonjour') {hello_error}")
 
 def sum_power(x, y, power_x=2, power_y=2):
     return x**power_x + y**power_y
-
 #sp_3 = sum_power(3) //ERROR
 #sp_34 = sum_power(3, 4) //ERROR
 #sp_py = sum_power(3, 4, power_y=3) //ERROR
