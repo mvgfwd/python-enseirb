@@ -4,30 +4,26 @@ import json
 import sys
 import os.path
 import platformdirs
-# from platformdirs import * 
 
 CACHE_DIR = platformdirs.user_cache_dir('weather')
 
 
 def weather_forecast(c):
-    #IN CACHE
-    #if os.path.exists(f'./cache/{c.lower()}.json'):
-    #    get_from_cache(c)
-    #IN NOT CACHE
-    #else:
 
-    def cache_file():
+    def cache_json(json_data):
         os.path.join(platformdirs.user_cache_dir('weather'))
-        f = open(f'{CACHE_DIR}/{c}.json', 'w')
-        f.write("TESTING AJA")
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        f = open(f'{CACHE_DIR}/{c.lower()}.json', 'w')
+        f.write(json.dumps(json_data[0]))
         f.close()
-
-    def cache_coord(coord):
-        pass
     
-    def retrieve_cache():
-        pass
-
+    def retrieve_cache(city):
+        f = open(f'{CACHE_DIR}/{city.lower()}.json', 'r')
+        data = json.load(f)
+        LON = data['lon']
+        LAT = data['lat']
+        return LON, LAT
+    
     def req_coord():
         URL_COORDCITY_API = f'https://nominatim.openstreetmap.org/search?q={c}&format=json'
         city_coord_api = requests.get(URL_COORDCITY_API, headers={"User-Agent": "Mozilla/5.0"})
@@ -37,12 +33,21 @@ def weather_forecast(c):
             LONG = json_data[0]['lon']
             LAT = json_data[0]['lat']
             get_weather(LONG, LAT)
-            cache_result(c.lower()+'.json', json.dumps(json_data[0]))
+            cache_json(json_data)
         else:
             raise ValueError("Location Not Found")
-
-    cache_file()
-    return req_coord()
+        
+    try:
+        with open(f'{CACHE_DIR}/{c.lower()}.json', 'r') as f:
+            lonlat = retrieve_cache(c)
+            get_weather(lonlat[0], lonlat[1])
+            print(f'cache loaded {lonlat}')
+    except FileNotFoundError:
+        req_coord()
+        print("fetching new data")
+    except Exception as e:
+        print(f'unexpected error => {e}')
+        raise
 
 
 def get_weather(long, lat):
@@ -60,21 +65,6 @@ def print_weather(temp, weather_code):
         print(f"{sys.argv[1]} has temp: {temp} °Celcius and {weather_codes[weather_code]}")
     else:
         print(f"{sys.argv[1]} has temp: {temp} °Celcius")
-    
-    
-def cache_result(cityname, json):
-    f = open(f'./cache/{cityname}', 'w')
-    f.write(json)
-    f.close()
-
-
-def get_from_cache(city):
-    f = open(f'./cache/{city}.json', 'r')
-    data = json.load(f)
-    LAT = data['lat']
-    LONG = data['lon']
-    get_weather(LONG, LAT)
-    f.close()
   
     
 weather_codes = {
