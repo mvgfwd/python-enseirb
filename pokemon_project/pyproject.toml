@@ -1,0 +1,14 @@
+[build-system]
+requires = ["flit_core >=3.11,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pokemon"
+authors = [{name = "ys", email = "jonajr05@gmail.com"}]
+license = "MIT"
+license-files = ["LICENSE"]
+dynamic = ["version", "description"]
+dependencies = [
+    "requests"
+]
+
